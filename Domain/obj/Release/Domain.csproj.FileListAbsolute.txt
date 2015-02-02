@@ -1,0 +1,4 @@
+E:\4SLEAM\PFA\AdminNET\Admin\Domain\bin\Release\Domain.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Domain\bin\Release\Domain.pdb
+E:\4SLEAM\PFA\AdminNET\Admin\Domain\obj\Release\Domain.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Domain\obj\Release\Domain.pdb

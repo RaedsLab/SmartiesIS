@@ -1,0 +1,66 @@
+﻿@{
+    Domain.Entities.Client c = Session["User"] as Domain.Entities.Client;
+    ViewBag.Title = "Profile";
+    ViewBag.Icon = "<span class=\"icon icon-person\">";
+    @model Domain.Entities.ShoppingList
+}
+
+<div class="content-padded">
+    <img style="position: relative; float: left;" src="http://placehold.it/128x128" />
+    <span style="margin-left: 10px; position: relative; margin-top: 25px; float: left; font-size: 23px;">@c.Id @c.Name @c.FamilyName</span>
+    <div class="clearfix"></div>
+
+    <span class="disabled" style="margin-left: 12px; position: relative; margin-top: 5px; float: left; font-size: 15px; color: gray;">@c.Email</span>
+
+    <div class="clearfix"></div>
+
+    <br>
+
+    @using (Html.BeginForm())
+    {
+
+        <button class=" btn btn-block btn-positive" type="submit">
+            <b><span class="icon icon-plus"></span></b>
+            New Shopping List
+        </button>
+
+        <div class="pull-right">
+            Private
+            <input type="checkbox" name="Private" checked="checked" />
+        </div>
+
+        @Html.TextBoxFor(model => model.Name, new { @placeholder = "Shopping List Name" })
+
+
+    }
+
+    <br>
+
+    <h3>Suggested items</h3>
+    <br>
+
+    <div class="row content-padded">
+        <div class="half">
+
+            <img width="128" height="128" src="@Url.Content("~/Content/Uploads/Products/"+ViewBag.p1.Image)" />
+            @ViewBag.p1.Name
+        </div>
+        <br />
+        <div class="half">
+
+            <img width="128" height="128" src="@Url.Content("~/Content/Uploads/Products/"+ViewBag.p2.Image)" />
+            @ViewBag.p2.Name
+        </div>
+        <br />
+        <div class="half">
+
+            <img width="128" height="128" src="@Url.Content("~/Content/Uploads/Products/"+ViewBag.p3.Image)" />
+            @ViewBag.p3.Name
+        </div>
+    </div>
+
+
+
+
+    <div class="clearfix"></div>
+</div>

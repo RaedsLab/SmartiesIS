@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StatProduct</title>
+</head>
+<body>
+    <div>
+        <p>views</p>
+
+
+
+
+        <div id="canvas-holder">
+            <canvas id="chart-area" width="300" height="300" />
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/charts")
+    @{int j = new Random((int)DateTime.Now.Ticks).Next(0x1000000);}
+
+
+    <script>
+        var pieData = [
+
+         @foreach (var i in ViewData)
+        {
+
+             j++;
+            if (i.Key != "count") {
+            <text>
+      {
+          value: @i.Value,
+          color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
+          highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
+          label: "@i.Key"
+      },
+
+        </text>
+            }
+        }
+
+   ];
+
+        window.onload = function () {
+            var ctx = document.getElementById("chart-area").getContext("2d");
+            window.myPie = new Chart(ctx).Pie(pieData);
+        };
+
+    </script>
+</body>
+</html>

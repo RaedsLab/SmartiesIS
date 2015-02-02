@@ -1,0 +1,12 @@
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\Data.dll.config
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\Data.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\Data.pdb
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\Domain.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\EntityFramework.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\EntityFramework.SqlServer.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\Domain.pdb
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\EntityFramework.xml
+E:\4SLEAM\PFA\AdminNET\Admin\Data\bin\Release\EntityFramework.SqlServer.xml
+E:\4SLEAM\PFA\AdminNET\Admin\Data\obj\Release\Data.csprojResolveAssemblyReference.cache
+E:\4SLEAM\PFA\AdminNET\Admin\Data\obj\Release\Data.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Data\obj\Release\Data.pdb

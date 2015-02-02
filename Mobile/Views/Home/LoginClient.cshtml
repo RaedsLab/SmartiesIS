@@ -1,0 +1,51 @@
+﻿@model Domain.Entities.Client
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<style>
+    IMG.displayed {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    DIV.container {
+        min-height: 10em;
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+
+<br><br><br><br><br>
+
+<img class="displayed" src="http://placehold.it/128x128" />
+<br><br><br><br><br>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+
+        <div class="content-padded">
+
+            <div class="input-group">
+                <div class="input-row">
+                    <label>E-Mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    @Html.TextBoxFor(model => model.Email, new { @placeholder = "your@email.com", @type = "email" })
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-row">
+                    <label>Password</label>
+                    @Html.TextBoxFor(model => model.Password, new { @placeholder = "Password", @type = "password" })
+                </div>
+            </div>
+            <br />
+            <input class="btn btn-block btn-positive" type="submit" value="Log-In" />
+        </div>
+    </fieldset>
+}

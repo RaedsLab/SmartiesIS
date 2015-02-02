@@ -1,0 +1,39 @@
+﻿<span id="canvas-holder">
+    <canvas id="chart-area" width="300" height="300" />
+</span>
+
+@Scripts.Render("~/bundles/charts")
+@{int j = new Random((int)DateTime.Now.Ticks).Next(0x1000000);}
+
+
+<script>
+    var pieData = [
+
+     @foreach (var i in TempData)
+        {
+
+             j++;
+            if (i.Key != "count" && i.Key!="Title") {
+
+                if (i.Key == "PieProds")
+                {
+                    break;
+                }
+            <text>
+  {
+      value: @i.Value,
+      color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
+      highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
+      label: "@i.Key"
+  },
+
+            </text>
+            }
+        }
+
+    ];
+
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(pieData);
+
+</script>

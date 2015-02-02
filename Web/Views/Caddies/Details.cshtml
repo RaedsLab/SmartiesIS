@@ -1,0 +1,58 @@
+﻿@model Domain.Entities.Caddy
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Caddy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.xPos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.xPos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.yPos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yPos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zPos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zPos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

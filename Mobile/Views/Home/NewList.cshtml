@@ -1,0 +1,113 @@
+﻿@model Domain.Entities.ItemShopping
+
+@{
+    Domain.Entities.ShoppingList list = Session["ShoppingList"] as Domain.Entities.ShoppingList;
+    ViewBag.Title = list.Name + " | Add Items";
+}
+
+
+<div class="content-padded">
+    @using (Html.BeginForm())
+    {
+
+        @Html.TextBoxFor(model => model.Product.Name, new { @placeholder = "Search", @style = "float: left; width: 75%;", @type = "search" })
+        <button style="float: right; width: 24%; height: 40px;" type="submit" class="btn btn-primary">
+            <span class="icon icon-search"></span>
+        </button>
+
+    }
+
+    <div class="clearfix"></div>
+    <!-- PUT SEARCH RESULT HERE !-->
+
+    <div>
+        <ul class="table-view">
+
+            @if (ViewData["Prod0"] != null)
+            {
+
+                foreach (var v in ViewData)
+                {
+                    if (v.Key.Contains("Prod"))
+                    {
+                        Domain.Entities.Product p = v.Value as Domain.Entities.Product;
+                        /*
+                                                <text>
+
+                                                    <li class="table-view-cell">
+
+
+                                                        <a class="navigate-right" href="./Home/addProdList?id=@p.Id" data-transition="slide-in">
+                                                            @p.Name
+                                                            <p>@p.Description</p>
+                                                        </a>
+                                                    </li>
+                                                </text>*/
+
+                        <il>
+                            @Html.ActionLink(p.Name, "addProdList", new { controller = "Home", Id = p.Id })
+                            @p.Description
+
+                        </il>
+
+
+
+                    }
+                }
+            }
+            else
+            {
+
+                <text>
+                    <li class="disabled text-center">@ViewBag.Error</li>
+                </text>
+
+            }
+
+        </ul>
+    </div>
+
+    <div style="clear:both;"></div>
+
+
+
+</div>
+
+<style>
+    .foot {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        margin: 5px;
+    }
+</style>
+
+<div class="foot">
+
+
+    @using (Ajax.BeginForm("addGenericList", "Home", FormMethod.Post, null))
+    {
+        @Html.TextBox("generic", null, new { @style = "float: left; width: 75%;", @type = "search", @placeholder = "Generic Brand" })
+
+        <button style="float: right; width: 24%; height: 40px;" type="submit" class="btn btn-primary">
+            <span class="icon icon-plus"></span>
+        </button>
+        <div class="clearfix"></div>
+
+    }
+
+
+    @using (Ajax.BeginForm("addCategoryList", "Home", FormMethod.Post, null))
+    {
+        @Html.TextBox("generic", null, new { @style = "float: left; width: 75%;", @type = "search", @placeholder = "Generic Product" })
+
+        <button style="float: right; width: 24%; height: 40px;" type="submit" class="btn btn-primary">
+            <span class="icon icon-plus"></span>
+        </button>
+        <div class="clearfix"></div>
+
+    }
+
+    <a class="btn btn-block btn-positive"><b><span class="icon icon-check"></span></b> Submit shopping list</a>
+
+</div>

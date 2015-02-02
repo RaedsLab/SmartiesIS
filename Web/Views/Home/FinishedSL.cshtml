@@ -1,0 +1,33 @@
+﻿<span id="canvas-holder">
+
+    <canvas id="barchart" height="300" width="300"></canvas>
+</span>
+
+
+
+<script>
+
+    var barChartData = {
+        labels: ["Purshsed", "Remaining"],
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [@TempData["SlFinished"], @TempData["SlUnFinished"]]
+            }
+        ]
+
+    }
+
+
+       
+        var ctx2 = document.getElementById("barchart").getContext("2d");
+        window.myBar = new Chart(ctx2).Bar(barChartData, {
+            responsive: false
+        });
+    
+
+
+</script>

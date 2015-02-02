@@ -1,0 +1,11 @@
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\Service.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\Service.pdb
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\Data.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\Domain.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\EntityFramework.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\Data.pdb
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\Domain.pdb
+E:\4SLEAM\PFA\AdminNET\Admin\Service\bin\Release\EntityFramework.xml
+E:\4SLEAM\PFA\AdminNET\Admin\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
+E:\4SLEAM\PFA\AdminNET\Admin\Service\obj\Release\Service.dll
+E:\4SLEAM\PFA\AdminNET\Admin\Service\obj\Release\Service.pdb
