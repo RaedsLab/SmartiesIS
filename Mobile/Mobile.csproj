@@ -166,6 +166,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\logo.png" />
     <Content Include="Content\ratchet-theme-android.css" />
     <Content Include="Content\ratchet-theme-android.min.css" />
     <Content Include="Content\ratchet-theme-ios.css" />
@@ -191,6 +192,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ratchet.js" />
     <Content Include="Scripts\ratchet.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -212,7 +214,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\LoginClient.cshtml" />
     <Content Include="Views\Home\NewList.cshtml" />
-    <Content Include="Views\Home\promProds.cshtml" />
+    <Content Include="Views\Home\ShoppingLists.cshtml" />
+    <Content Include="Views\Home\ShoppingListDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

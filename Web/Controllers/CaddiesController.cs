@@ -49,8 +49,23 @@ namespace Web.Controllers
         // GET: Caddies/Create
         public ActionResult Create()
         {
+            Caddy caddy = new Caddy();
+            caddy.xPos = 0;
+            caddy.yPos = 0;
+            caddy.zPos = 0;
+            caddy.ClientId = null;
+            caddy.State = "Free";
+            Log log = new Log();
+            log.Trigger = "Caddy";
+            log.Message = "New Caddy added";
+            log.Time = DateTime.Now;
+            log.Cide = "4";
+            db.Caddy.Add(caddy);
+            db.Log.Add(log);
+            db.SaveChanges();
+
             ViewBag.ClientId = new SelectList(db.Client, "Id", "Name");
-            return View();
+            return RedirectToAction("Index");
         }
 
         // POST: Caddies/Create
@@ -62,7 +77,19 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                caddy.xPos = 0;
+                caddy.yPos = 0;
+                caddy.zPos = 0;
+                caddy.ClientId = null;
+                caddy.State = "Free";
+                Log log = new Log();
+                log.Trigger = "Caddy";
+                log.Message = "New Caddy added";
+                log.Time =  DateTime.Now;
+                log.Cide = "4";
                 db.Caddy.Add(caddy);
+                db.Log.Add(log);
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

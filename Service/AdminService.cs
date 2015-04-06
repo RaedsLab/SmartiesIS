@@ -47,7 +47,13 @@ namespace Service
         }
         public Admin LogAdmin(string email, string pwd)
         {
-            var admin = utOfWork.AdminRepository.Get(a => a.Email.Equals(email) && a.Password.Equals(pwd));
+            var admin = utOfWork.AdminRepository.Get(a => (a.Email.Equals(email) && a.Password.Equals(pwd)) && a.IsVendor==false);
+            return admin; // return null if dosn't exist
+        }
+
+        public Admin LogVendor(string email, string pwd)
+        {
+            var admin = utOfWork.AdminRepository.Get(a => (a.Email.Equals(email) && a.Password.Equals(pwd)) && a.IsVendor == true);
             return admin; // return null if dosn't exist
         }
 
@@ -63,7 +69,7 @@ namespace Service
         Admin GetAdminById(int id);
         bool IsSuperAdmin(int id);
         Admin LogAdmin(string email, string pwd);
-
+        Admin LogVendor(string email, string pwd);
 
     }
 }

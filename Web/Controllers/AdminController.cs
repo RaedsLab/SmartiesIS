@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Data;
+using Domain.Entities;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace Web.Controllers
 {
     public class AdminController : Controller
     {
+        private Context db = new Context();
+
         IAdminService AdminService = null;
 
         public AdminController()
@@ -21,11 +24,20 @@ namespace Web.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            return View(db.Admin.ToList());
+        }
+
+        public ActionResult VendorsIndex()
+        {
+            return View(db.Admin.ToList());
         }
         public ActionResult LogOff()
         {
-            Session["Admin"] = null;
+            if (Session["Vendor"] != null)
+            { Session["Vendor"] = null; }
+            if (Session["Admin"] != null)
+            { Session["Admin"] = null; }
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -33,14 +45,55 @@ namespace Web.Controllers
         {
             return View();
         }
-         [HttpPost]
+        [HttpPost]
         public ActionResult Login(Admin admin)
         {
-          Admin a =  AdminService.LogAdmin(admin.Email, admin.Password);
-          if (a != null){
-              Session["Admin"]=a;
-              return RedirectToAction("Index","Home");
-          } 
+            Admin a = AdminService.LogAdmin(admin.Email, admin.Password);
+            if (a != null)
+            {
+                Session["Admin"] = a;
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+        public ActionResult VendorLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult VendorLogin(Admin admin)
+        {
+            Admin a = AdminService.LogVendor(admin.Email, admin.Password);
+            if (a != null)
+            {
+                Session["Vendor"] = a;
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+        public ActionResult VendorPanel()
+        {
+            if (Session["Vendor"] != null)
+            {
+                Admin vendor = Session["Vendor"] as Admin;
+                ViewBag.vendor += vendor.Name;
+                return View();
+            }
+            return RedirectToAction("VendorLogin");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult VendorPanel([Bind(Include = "Id,Name,FamilyName,Email,Password,Tag,Privacy,CaddyId")] Client client)
+        {
+            if (ModelState.IsValid)
+            {
+                client.Password = "0000";
+                client.Privacy = "1";
+                db.Client.Add(client);
+                db.SaveChanges();
+                return View();
+            }
+
             return View();
         }
 

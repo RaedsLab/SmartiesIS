@@ -9,27 +9,30 @@
 <script>
     var pieData = [
 
-     @foreach (var i in TempData)
         {
-
-             j++;
-            if (i.Key != "count" && i.Key!="Title") {
-
-                if (i.Key == "PieProds")
-                {
-                    break;
-                }
-            <text>
-  {
-      value: @i.Value,
-      color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
-      highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
-      label: "@i.Key"
-  },
-
-            </text>
-            }
-        }
+            value: 3,
+            color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
+            highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
+            label: "Milk"
+        },
+{
+    value: 2,
+    color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
+    highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
+    label: "Bread"
+},
+{
+    value: 1,
+    color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
+    highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
+    label: "Yogurt"
+},
+{
+    value: 4,
+    color: "@String.Format("#{0:X6}", new Random((int)j).Next(0x1000000))",
+        highlight: "@String.Format("#{0:X6}", new Random((int)++j).Next(0x1000000))",
+    label: "Cheese"
+    },
 
     ];
 

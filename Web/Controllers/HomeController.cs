@@ -15,14 +15,19 @@ namespace Web.Controllers
         IProductService ProductService = null;
         IItemShoppingService ItemService = null;
         IShoppingListService ShoppingListService = null;
+        ICaddyService CaddyService = null;
+        IAdService AdService = null;
+        IClientService ClientService = null;
+
         public HomeController()
         {
             ProductService = new ProductService();
             ItemService = new ItemShoppingService();
             ShoppingListService = new ShoppingListService();
+            CaddyService = new CaddyService();
+            AdService = new AdService();
+            ClientService = new ClientService();
         }
-
-
 
         public ActionResult Index()
         {
@@ -32,6 +37,10 @@ namespace Web.Controllers
                 Admin a = Session["Admin"] as Admin;
                 ViewBag.Admin += a.Name;
             }
+            else if (Session["Vendor"] != null)
+            {
+                return RedirectToAction("VendorPanel", "Admin");
+            }
             else
             {
                 return RedirectToAction("Login", "Admin");
@@ -40,6 +49,7 @@ namespace Web.Controllers
 
             var prods = ProductService.GetAllProducts();
             var items = ItemService.GetAll();
+
             var shoppingLists = ShoppingListService.GetAll();
 
             int count = 0;
@@ -80,6 +90,23 @@ namespace Web.Controllers
             }
             TempData.Add("SlFinished", count);
             TempData.Add("SlUnFinished", count1);
+
+            var caddies = CaddyService.GetAll();
+
+            int totalCaddies = caddies.Count();
+            int freeCaddies = 0;
+            foreach (Caddy caddy in caddies)
+            {
+                if (caddy.State == "Free")
+                {
+                    freeCaddies += 1;
+                }
+            }
+            ViewBag.freeCaddies = freeCaddies;
+            ViewBag.caddies = (int)(freeCaddies / totalCaddies) * 100;
+            ViewBag.products = prods.Count();
+            ViewBag.ads = AdService.GetAll().Count();
+            ViewBag.users = ClientService.GetAll().Count();
 
             return View();
         }
@@ -137,5 +164,13 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult StatSails()
+        {
+            var prods = ProductService.GetAllProducts();
+            var items = ItemService.GetAll();
+
+
+            return View();
+        }
     }
 }

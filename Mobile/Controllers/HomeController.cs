@@ -4,6 +4,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.ModelBinding;
 using System.Web.Mvc;
@@ -28,6 +29,11 @@ namespace Mobile.Controllers
 
         public ActionResult Index()
         {
+
+            if (Response.Cookies["User"].Value != null)
+            {
+                Session["User"] = ClientService.GetById(int.Parse(Response.Cookies["User"].Value));
+            }
             if (Session["User"] == null)
             {
                 return RedirectToAction("LoginClient", "Home");
@@ -43,7 +49,8 @@ namespace Mobile.Controllers
             foreach (var item in initList)
             {
                 item.ShoppingList = ShoppingListService.GetById((int)item.ShoppingListId);
-                ItemShopping sitem = ItemShoppingService.GetById(item.Id);
+                int id = (int)item.Id;
+                ItemShopping sitem = ItemShoppingService.GetById(id);
 
                 if (sitem.ShoppingList.ClientId == Client.Id)
                 {
@@ -152,7 +159,7 @@ namespace Mobile.Controllers
                         rnd = new Random();
                         r = rnd.Next(prods.Count);
                         ViewBag.p3 = prods[r];
-                    } 
+                    }
                 }
                 else
                 {
@@ -190,6 +197,8 @@ namespace Mobile.Controllers
             if (c != null)
             {
                 Session["User"] = c;
+                Response.Cookies["User"].Value = c.Id.ToString();
+                Response.Cookies["User"].Expires = DateTime.Now.AddDays(1);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -331,7 +340,6 @@ namespace Mobile.Controllers
             ItemShopping s = new ItemShopping();
             s.Brand = generic;
             s.ShoppingListId = sl.Id;
-            s.ProductId = Client.Id;
             s.Quantity = 1;
             s.ProductId = null;
             ItemShoppingService.AddNew(s);
@@ -347,37 +355,54 @@ namespace Mobile.Controllers
             ItemShopping s = new ItemShopping();
             s.Category = generic;
             s.ShoppingListId = sl.Id;
-            s.ProductId = Client.Id;
             s.Quantity = 1;
             s.ProductId = null;
             ItemShoppingService.AddNew(s);
             return RedirectToAction("NewList", "Home");
         }
 
-        public ActionResult addProdList([QueryString] int id)
+        public ActionResult addProdList(int id)
         {
-            ShoppingList sl = Session["ShoppingList"] as ShoppingList;
+            if (Session["ShoppingList"] != null)
+            {
+                ShoppingList sl = Session["ShoppingList"] as ShoppingList;
+                Client Client = Session["User"] as Client;
+                ItemShopping s = new ItemShopping();
+                s.ProductId = id;
+                s.Product = ProductService.GetProductById(id);
+                s.ShoppingListId = sl.Id;
+                s.ShoppingList = sl;
+                s.Quantity = 1;
+                ItemShoppingService.AddNew(s);
+            }
+            return RedirectToAction("NewList", "Home");
+        }
+
+        public ActionResult ShoppingLists()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("LoginClient", "Home");
+            }
             Client Client = Session["User"] as Client;
-            ItemShopping s = new ItemShopping();
-            s.ProductId = id;
-            s.ShoppingListId = sl.Id;
-            s.ProductId = Client.Id;
-            s.Quantity = 1;
-            s.ProductId = null;
-            ItemShoppingService.AddNew(s);
-            return RedirectToAction("NewList", "Home");
+            var sl = ShoppingListService.GetByClientId(Client.Id);
+            return View(sl);
         }
 
-        public ActionResult promProds()
+        public ActionResult ShoppingListDetails(int id)
         {
-
-
-
-
-
-
-
-            return View();
+            List<ItemShopping> itemShopping = ItemShoppingService.GetAll().Where(i => i.ShoppingListId == id).ToList();
+            List<ItemShopping> list = new List<ItemShopping>();
+            foreach (var item in itemShopping)
+            {
+                if (item.ProductId != null)
+                {
+                    item.Product = ProductService.GetProductById((int)item.ProductId);
+                    list.Add(item);
+                }
+            }
+            return View(list);
         }
+
     }
 }

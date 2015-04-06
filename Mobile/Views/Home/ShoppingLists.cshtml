@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Domain.Entities.ShoppingList>
+
+@{
+    ViewBag.Title = "My Shopping Lists";
+}
+
+
+<div>
+    <ul class="table-view">
+
+        @foreach (var item in Model)
+        {
+            <text>
+
+                <li class="table-view-cell">
+                    @Html.DisplayFor(modelItem => item.Name)
+
+                    @if ((bool)item.Finished)
+                    {
+                        <p>Finished Shopping</p>
+                    }
+                    else
+                    {
+                        <p>
+                            This list is still active.
+
+                            @using (Html.BeginForm("ShoppingListDetails", "Home", new { id = item.Id }, FormMethod.Post, null))
+                            {
+                                <button type="submit" class="btn btn-primary">Inspect</button>
+                                @Html.Hidden("id", item.Id)
+                            }
+                        </p>
+                    }
+                </li>
+            </text>
+
+        }
+    </ul>
+</div>
+
+

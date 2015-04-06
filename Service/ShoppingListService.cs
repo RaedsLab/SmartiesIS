@@ -39,6 +39,14 @@ namespace Service
             utOfWork.ShoppingListRepository.Update(p);
             utOfWork.Commit();
         }
+
+
+        public IEnumerable<ShoppingList> GetByClientId(int id)
+        {
+           return utOfWork.ShoppingListRepository.GetMany(s => s.ClientId ==id);
+        }
+
+
     }
     public interface IShoppingListService
     {
@@ -47,6 +55,8 @@ namespace Service
         void AddNew(ShoppingList p);
         void Delete(int id);
         void Edit(ShoppingList p);
+
+        IEnumerable<ShoppingList> GetByClientId(int id);
 
     }
 }

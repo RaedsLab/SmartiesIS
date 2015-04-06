@@ -51,6 +51,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                client.Password = "0000";
+                client.Privacy = "1";
                 db.Client.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Index");

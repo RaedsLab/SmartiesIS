@@ -3,24 +3,129 @@
 }
 
 <div class="jumbotron">
-    <h1>Welcome  @ViewBag.Admin</h1>
-    <p class="lead">
-        @Html.Partial("PieChart", TempData)
-        @Html.Partial("FinishedSL", TempData)
-    </p>
-</div>
+    <h2>Welcome to your administration panel <b>@ViewBag.Admin</b></h2>
 
-<div class="row">
-    <div class="col-md-4">
-
-        <h2>Getting started</h2>
-
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <h2>Overview</h2>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>
+                    @ViewBag.users
+                </h3>
+                <p>
+                    <b>Users count</b>
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios7-people"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
     </div>
 
-</div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-orange">
+            <div class="inner">
+                <h3>
+                    @ViewBag.products
+                </h3>
+                <p>
+                    <b>Products</b>
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-clipboard"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-maroon">
+            <div class="inner">
+                <h3>
+                    @ViewBag.ads
+                </h3>
+                <p>
+                    <b>  Advertisement</b>
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios7-pricetag-outline"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>
+                    @ViewBag.caddies % (@ViewBag.freeCaddies)
+                </h3>
+                <p>
+                    <b> Carts</b>
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios7-cart-outline"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <h2>Analytic</h2>
+
+    <br />
+    <hr />
+
+    <div class="row lead">
+        <div class="col-md-6 col-lg-6 col-sm-9">
+            @Html.Partial("PieChart", TempData)
+        </div>
+        <div class="right col-md-6 col-lg-6 col-sm-9">
+            @Html.Partial("FinishedSL", TempData)
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-sm-9 col-sm-offset-3" style="width:50%">
+            <canvas id="canvas" height="450" width="450"></canvas>
+        </div>
+
+        <script>
+    var radarChartData = {
+        labels: ["Users", "Caddies", "Products", "Ads", "Asiles"],
+        datasets: [
+            {
+                label: "My Market",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [@ViewBag.users, @ViewBag.freeCaddies, @ViewBag.products, @ViewBag.ads, 5]
+            }
+        ]
+    };
+
+        window.onload = function () {
+            window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+                responsive: true
+            });
+        }
+
+        </script>

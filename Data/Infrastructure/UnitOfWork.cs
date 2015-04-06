@@ -16,6 +16,10 @@ namespace Data.Infrastructure
             this.dbFactory = dbFactory;
         }
 
+        public void Dispose()
+        {
+            dbFactory.Dispose();
+        }
 
         /// 
         private IAdRepository AdRepository;

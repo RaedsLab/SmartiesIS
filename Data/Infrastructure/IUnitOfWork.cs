@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Infrastructure
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         void Commit();
 

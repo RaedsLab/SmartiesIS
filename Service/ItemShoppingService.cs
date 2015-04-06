@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class ItemShoppingService : IItemShoppingService
+    public class ItemShoppingService : IItemShoppingService 
     {
         static DatabaseFactory dbFactory = new DatabaseFactory();
         IUnitOfWork utOfWork = new UnitOfWork(dbFactory);
         ////////////
+
+        
 
         public IEnumerable<ItemShopping> GetAll()
         {
@@ -40,10 +42,14 @@ namespace Service
             utOfWork.ItemShoppingRepository.Update(p);
             utOfWork.Commit();
         }
+        public void Dispose()
+        {
+            utOfWork.Dispose();
+        }
 
     }
 
-    public interface IItemShoppingService
+    public interface IItemShoppingService : IDisposable
     {
         IEnumerable<ItemShopping> GetAll();
         ItemShopping GetById(int id);
